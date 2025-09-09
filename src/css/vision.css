@@ -1,0 +1,19 @@
+.video-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.output-canvas {
+  z-index: 10;
+  background-color: black;
+  border-radius: 10px;
+  display: none;
+}
+
+.webcam {
+  z-index: 1;
+  object-fit: cover;
+  display : none;
+}

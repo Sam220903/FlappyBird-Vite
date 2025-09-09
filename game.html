@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+    <link rel="stylesheet" href="src/css/general.css">
+    <link rel="stylesheet" href="src/css/game.css">
+    <link rel="stylesheet" href="src/css/vision.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="video-view" id="videoView">
+            <video class="webcam" autoplay playsinline id="webcam"></video>
+            <canvas class="output-canvas" id="outputCanvas" width="1280" height="720" ></canvas>
+        </div>
+
+        <div class="instructions-container" id="instructions-container">
+            <div class="text-container">
+                <h1>Instrucciones</h1>
+                <ol>
+                    <li><b>Avanza entre las tuberias sin chocar</b></li>
+                    <li><b>Levanta y baja el índice para saltar</b></li>
+                    <li><b>Evita tocar el suelo</b></li>
+                    <li><b>Pulgar arriba para iniciar</b></li>
+                    <li><b>Entre más avances, ¡acumularás puntos!</b></li>
+                </ol>
+            </div>
+            <div class="actions-container">
+                <button class="start" id="start-game"> 
+                    <img src="/images/start-btn.png" alt="restart game">
+                </button>
+                <b id="or">ó</b>
+                <img id="likeHand" src="/images/like_hand.png" alt="Pulgar arriba">
+            </div>
+        </div>
+
+        <div class="game-container" id="game-container">
+            <canvas id="board" class="board">
+                
+            </canvas>
+            
+            <button class="restart" id="restart"> 
+                <img src="/images/restart-btn.png" alt="restart game">
+            </button>
+        </div>
+    </div>
+</body>
+<script type="module" src="src/js/game.js"></script>
+<script type="module" src="src/js/vision.js"></script>
+</html>

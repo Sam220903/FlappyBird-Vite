@@ -1,0 +1,54 @@
+div.start-screen{
+    display: flex;
+    justify-content: center;
+}
+
+div.screen-container{
+    background-image: url("/images/bg.png");
+    /* width: 750px;
+    height: 570px; */
+    width: 60vw;
+    height: 90vh;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+img.logo{
+    width: 70%;
+    height: 50%;
+    object-fit: contain;
+}
+
+button.start{
+    object-fit: contain;
+    margin-top: 70px;
+    transition: 0.1s ease-in-out;
+    width: 20%;
+    height: 10%;
+    border: none;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.start:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.1s ease-in-out;
+}
+
+button.start img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+

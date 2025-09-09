@@ -1,0 +1,142 @@
+
+div.main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Estilos del panel de juego */
+
+div.game-container {
+    position: relative;
+    display: inline-block;
+    display: none;
+}
+
+canvas.board {
+    background-image: url('/images/bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+    position: relative;
+}
+
+
+button.restart {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+    margin-top: 25px;
+    pointer-events: auto; 
+}
+
+button.restart:hover {
+    transform:  translate(-50%, -50%) scale(1.1);
+    transition: 0.1s ease-in-out;
+}
+
+button.restart img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Estilos del panel de instrucciones */
+
+h1 , li {
+    font-family: 'PressStart2P';
+    color: #fff;
+    font-weight: 100;
+}
+
+h1 {
+    margin-bottom: 50px;
+    font-size: 4vh;
+}
+
+li {
+    text-align: left;
+    margin: 20px 0;
+    font-size: 2vh;
+}
+
+div.text-container {
+    background-color: #00000081;
+    padding: 20px;
+    border-radius: 10px;
+    padding-left: 5vh;
+}
+
+div.instructions-container {
+    background-image: url("/images/bg.png");
+    /* Calcular dimensiones en base a la pantalla */
+    width: 60vw;
+    height: 90vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+button.start{
+    object-fit: contain;
+    transition: 0.1s ease-in-out;
+    width: 50%;
+    height: 70%;
+    border: none;
+    background: transparent;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+button.start:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.1s ease-in-out;
+}
+
+button.start img{
+    width: 7vw;
+    height: 7vh;
+    object-fit: contain;
+}
+
+div.actions-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #0000004d;
+    padding: 7px;
+    border-radius: 10px;
+}
+
+img#likeHand {
+    width: 5vh;
+    height: 5vh;
+    object-fit: contain;
+    margin-left: 20px;
+}
+
+
+b#or{
+    color: #fff;
+    font-family: 'PressStart2P';
+}
