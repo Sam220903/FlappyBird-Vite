@@ -1,0 +1,13 @@
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  server: {
+    fs: {
+      allow: ['..']
+    }
+  },
+  assetsInclude: ['**/*.wasm'],
+  optimizeDeps: {
+    exclude: ['@mediapipe/tasks-vision']
+  }
+})

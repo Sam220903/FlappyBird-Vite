@@ -6,8 +6,8 @@ import { Pipe } from './components/pipe.js';
 let startBtn = document.getElementById("start-game");
 
 // Use vh and vw for responsive design
-let boardWidth = window.innerWidth * 0.6; // 50vw
-let boardHeight = window.innerHeight * 0.9; // 80vh
+let boardWidth = window.innerWidth * 0.6; // 60vw
+let boardHeight = window.innerHeight * 0.9; // 90vh
 
 
 // Bird coordinates
@@ -206,10 +206,13 @@ const resetGame = () => {
 // }
 
 const detectCollision = (a, b) => {
+    // Margen vertical más amplio para colisiones arriba/abajo
+    let verticalMargin = 20; // Ajusta este valor según necesites
+    
     return a.x < b.x + b.width && 
             a.x + a.width > b.x &&
-            a.y < b.y + b.height &&
-            a.y + a.height > b.y;
+            a.y + verticalMargin < b.y + b.height &&
+            a.y + a.height - verticalMargin > b.y;
 }
 
 

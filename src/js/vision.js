@@ -37,12 +37,12 @@ navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
 
 const createGestureRecognizer = async () => {
   const vision = await FilesetResolver.forVisionTasks(
-    'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@latest/wasm'
+    '/node_modules/@mediapipe/tasks-vision/wasm'
   );
   gestureRecognizer = await GestureRecognizer.createFromOptions(vision, {
     baseOptions: {
       modelAssetPath:
-        'https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/1/gesture_recognizer.task',
+        'src/models/gesture_recognizer.task',
       delegate: 'GPU'
     },
     runningMode: 'VIDEO'
