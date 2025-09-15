@@ -36,11 +36,22 @@ let bird = new Bird();
 
 let restartBtn = document.getElementById("restart");
 
-
+// Views
 let instructionsContainer = document.getElementById("instructions-container");
 let gameContainer = document.getElementById("game-container");
 
+// Sounds
+let flapSound = new Audio("/sounds/flap.wav");
+let fallSound = new Audio("/sounds/fall.wav");
+let pointSound = new Audio("/sounds/point.wav");
+let selectSound = new Audio("/sounds/select.wav");
+let mainSong = new Audio("/sounds/main_song.wav");
+mainSong.volume = 0.7;
+mainSong.loop = true;
+
+
 startBtn.addEventListener("click", () => {
+    selectSound.play();
     instructionsContainer.style.display = "none";
     gameContainer.style.display = "inline-block";
 });
@@ -70,6 +81,8 @@ window.onload = () => {
     setInterval(() => placePipes(context), 1500)
 
     // document.addEventListener("keydown", moveBird); 
+
+    mainSong.play();
 }  
 
 const update = (context) => { 
@@ -96,9 +109,12 @@ const update = (context) => {
             if(!pipe.passed && bird.x > pipe.x + pipe.width) {
                 score += 0.5; // 0.5 because there are two pipes :0
                 pipe.passed = true;
+                // Just play sound when passing bottom pipe
+                if (pipe.position === 1) pointSound.play();
             }
 
             if(detectCollision(bird, pipe)){
+                fallSound.play();
                 gameOver = true;
             }
         }
@@ -118,6 +134,7 @@ const update = (context) => {
         }
 
         if (gameOver){
+            fallSound.play();
             context.font = "30px PressStart2P";
             context.fillText("GAME OVER", boardWidth / 2, boardHeight / 2 - 50);
             restartBtn.style.display = "block";
@@ -164,11 +181,15 @@ const placePipes = (context) => {
 // }
 
 const jump = () => {
+    if (gameOver) return;
     speedY = -6;
     if (!gameStarted) {
         gameStarted = true;
         return;
     }
+    // Permitir encimar el sonido rebobinando la instancia
+    flapSound.currentTime = 0;
+    flapSound.play();
 }
 
 const resetGame = () => {
@@ -187,6 +208,8 @@ const resetGame = () => {
         gameOver = false;
         gameStarted = false;
     }
+
+    selectSound.play();
 }
 
 // const resetGame = (e) => {

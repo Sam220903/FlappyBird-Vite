@@ -11,10 +11,18 @@
     <div class="start-screen">
         <div class="screen-container">
             <img class="logo" src="/images/logo.svg" alt="logo">
-            <button class="start" id="play" onclick="location.href='game.html'"> 
+            <button class="start" id="play" onclick="start()"> 
                 <img src="/images/start-btn.png" alt="play button">
             </button>
         </div>
     </div>
 </body> 
+
+<script>
+    let selectSound = new Audio("/sounds/select.wav");
+    function start() {
+        selectSound.play();
+        location.href = 'game.html';
+    }
+</script>
 </html>
