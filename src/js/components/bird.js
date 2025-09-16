@@ -17,7 +17,7 @@ export class Bird {
   constructor() {
     for(let i = 0; i < this.totalImages; i++){
       let image = new Image();
-      image.src = `/images/eagle${i}.png`
+      image.src = `./images/eagle${i}.png`
       image.onload = () => this.imageLoaded = true;
       this.images.push(image);
     }

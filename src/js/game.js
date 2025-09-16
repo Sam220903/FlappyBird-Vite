@@ -41,11 +41,11 @@ let instructionsContainer = document.getElementById("instructions-container");
 let gameContainer = document.getElementById("game-container");
 
 // Sounds
-let flapSound = new Audio("/sounds/flap.wav");
-let fallSound = new Audio("/sounds/fall.wav");
-let pointSound = new Audio("/sounds/point.wav");
-let selectSound = new Audio("/sounds/select.wav");
-let mainSong = new Audio("/sounds/main_song.wav");
+let flapSound = new Audio("./sounds/flap.wav");
+let fallSound = new Audio("./sounds/fall.wav");
+let pointSound = new Audio("./sounds/point.wav");
+let selectSound = new Audio("./sounds/select.wav");
+let mainSong = new Audio("./sounds/main_song.wav");
 mainSong.volume = 0.7;
 mainSong.loop = true;
 

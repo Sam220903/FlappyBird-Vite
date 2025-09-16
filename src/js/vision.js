@@ -37,12 +37,12 @@ navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
 
 const createGestureRecognizer = async () => {
   const vision = await FilesetResolver.forVisionTasks(
-    '/node_modules/@mediapipe/tasks-vision/wasm'
+    './wasm/'
   );
   gestureRecognizer = await GestureRecognizer.createFromOptions(vision, {
     baseOptions: {
       modelAssetPath:
-        'src/models/gesture_recognizer.task',
+        './models/gesture_recognizer.task',
       delegate: 'GPU'
     },
     runningMode: 'VIDEO'

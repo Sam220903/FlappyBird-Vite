@@ -17,7 +17,7 @@ export class Pipe {
 
   setPosition(position) {
     this.position = position;
-    this.image.src = position === 0 ? '/images/top_pipe.png' : '/images/bottom_pipe.png';
+    this.image.src = position === 0 ? './images/top_pipe.png' : './images/bottom_pipe.png';
     this.image.onload = () => { this.imageLoaded = true; }
   }
 
