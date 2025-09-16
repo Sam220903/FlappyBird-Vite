@@ -10,6 +10,7 @@ let webcamRunning = true;
 
 const videoRef = document.getElementById("webcam");
 const canvasRef = document.getElementById("outputCanvas");
+const loadingContainer = document.querySelector('.loading-bar-container');
 
 let canvasCtx = null;
 
@@ -22,31 +23,63 @@ const FRAME_SKIP_RATE = 3;
 let lastGestures = [];
 let previousGesture = '';
 
+// Función para actualizar la barra de progreso
+const updateLoadingBar = (progress) => {
+  const blocks = document.querySelectorAll('.block-meter');
+  const totalBlocks = blocks.length;
+  const blocksToFill = Math.floor((progress / 100) * totalBlocks);
+  
+  // Llenar bloques hasta el progreso actual
+  for (let i = 0; i < blocksToFill; i++) {
+    if (blocks[i]) {
+      blocks[i].style.opacity = '1';
+      blocks[i].style.animation = 'none';
+    }
+  }
+};
+
+// Función para ocultar la barra de carga
+const hideLoadingBar = () => {
+  if (loadingContainer) {
+    loadingContainer.style.display = 'none';
+  }
+};
+
 const constraints = { video: true };
 
 navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+  updateLoadingBar(20); // 20% - cámara obtenida
   videoRef.srcObject = stream;
   videoRef.addEventListener('loadeddata', () => {
+    updateLoadingBar(40); // 40% - video cargado
     canvasCtx = canvasRef.getContext('2d');
     createGestureRecognizer().then(() => {
+      updateLoadingBar(100); // 100% - reconocedor creado y listo
       predictWebcam();
       canvasRef.style.display = 'block';
+      // Pequeño delay antes de ocultar la barra para mejor UX
+      setTimeout(() => {
+        hideLoadingBar();
+      }, 1000);
     });
   });
 });
 
 const createGestureRecognizer = async () => {
   const vision = await FilesetResolver.forVisionTasks(
-    '/node_modules/@mediapipe/tasks-vision/wasm'
+    './wasm/'
   );
+  updateLoadingBar(60); // 60% - FilesetResolver listo
+  
   gestureRecognizer = await GestureRecognizer.createFromOptions(vision, {
     baseOptions: {
       modelAssetPath:
-        'src/models/gesture_recognizer.task',
+        './models/gesture_recognizer.task',
       delegate: 'GPU'
     },
     runningMode: 'VIDEO'
   });
+  updateLoadingBar(80); // 80% - GestureRecognizer creado
 };
 
 const predictWebcam = async () => {
@@ -60,8 +93,6 @@ const predictWebcam = async () => {
 
       canvasCtx.save();
       canvasCtx.clearRect(0, 0, canvasRef.width, canvasRef.height);
-
-
 
       lastVideoTime = videoRef.currentTime;
       results = gestureRecognizer.recognizeForVideo(videoRef, nowInMs);
