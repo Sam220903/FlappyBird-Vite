@@ -9,6 +9,10 @@ let startBtn = document.getElementById("start-game");
 let boardWidth = window.innerWidth * 0.6; // 60vw
 let boardHeight = window.innerHeight * 0.9; // 90vh
 
+if (window.innerWidth < 800) {
+    boardWidth = window.innerWidth;
+    boardHeight = window.innerHeight;
+}
 
 // Bird coordinates
 let birdX = boardWidth / 8;
