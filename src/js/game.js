@@ -82,7 +82,7 @@ window.onload = () => {
     bird.draw();
 
     requestAnimationFrame(() => update(context));
-    setInterval(() => placePipes(context), 1500)
+    setInterval(() => placePipes(context), 2500)
 
     // document.addEventListener("keydown", moveBird); 
 
@@ -140,7 +140,8 @@ const update = (context) => {
         if (gameOver){
             fallSound.play();
             context.font = "30px PressStart2P";
-            context.fillText("GAME OVER", boardWidth / 2, boardHeight / 2 - 50);
+            context.fillText("GAME OVER", boardWidth / 2, boardHeight / 2 - 70);
+            context.fillText("¿Reiniciar?", boardWidth / 2, boardHeight / 2 - 10);
             restartBtn.style.display = "block";
         }
     }
