@@ -101,8 +101,18 @@ const predictWebcam = async () => {
     }
   }
 
-  if (results && results.gestures && results.gestures.length > 0) {
-    const currentGesture = results.gestures[0][0].categoryName;
+  if (results) {
+    let currentGesture = 'None';
+    
+    // Usar el reconocedor nativo si detecta algo
+    if (results.gestures && results.gestures.length > 0) {
+      currentGesture = results.gestures[0][0].categoryName;
+    }
+    
+    // Si no detecta Open_Palm nativo, usar detección personalizada
+    if (currentGesture !== 'Open_Palm' && results.landmarks && detectCustomOpenPalm(results.landmarks)) {
+      currentGesture = 'Open_Palm';
+    }
 
     if (currentGesture !== 'None' && detectGestureChange(currentGesture)) {
       lastGestures.push(currentGesture);
@@ -115,7 +125,7 @@ const predictWebcam = async () => {
 
     }
 
-    if (currentGesture == ['Thumb_Up']) resetGame();
+    if (currentGesture === 'Thumb_Up') resetGame();
   }
 
   canvasCtx.save();
@@ -148,11 +158,45 @@ const predictWebcam = async () => {
   }
 };
 
+// Función para detectar mano abierta personalizada
+const detectCustomOpenPalm = (landmarks) => {
+  if (!landmarks || landmarks.length === 0) return false;
+  
+  const hand = landmarks[0]; // Primera mano detectada
+  
+  // Índices de landmarks para las puntas y articulaciones de los dedos
+  const fingerTips = [8, 12, 16, 20]; // Índice, medio, anular, meñique
+  const fingerMCPs = [5, 9, 13, 17]; // Articulaciones base de los dedos
+  
+  // Verificar que todos los dedos (excepto pulgar) estén extendidos
+  let extendedFingers = 0;
+  
+  for (let i = 0; i < fingerTips.length; i++) {
+    const tipY = hand[fingerTips[i]].y;
+    const mcpY = hand[fingerMCPs[i]].y;
+    
+    // El dedo está extendido si la punta está por encima de la articulación base
+    if (tipY < mcpY) {
+      extendedFingers++;
+    }
+  }
+  
+  // Para el pulgar (opcional, más flexible)
+  const thumbTipY = hand[4].y;
+  const thumbMCPY = hand[2].y;
+  const thumbExtended = thumbTipY < thumbMCPY;
+  
+  // Considerar mano abierta si:
+  // - Al menos 3 dedos están extendidos, O
+  // - Todos los dedos (incluido pulgar) están extendidos
+  return extendedFingers >= 3 || (extendedFingers >= 2 && thumbExtended);
+};
+
 const detectPulse = () => {
   return (
-    lastGestures[0] === 'Pointing_Up' &&
+    lastGestures[0] === 'Open_Palm' &&
     lastGestures[1] === 'Closed_Fist' &&
-    lastGestures[2] === 'Pointing_Up'
+    lastGestures[2] === 'Open_Palm'
   );
 };
 
