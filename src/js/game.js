@@ -151,7 +151,7 @@ const placePipes = (context) => {
 
     const top_pipe = new Pipe();
     const bottom_pipe = new Pipe();
-    const openingSpace = boardHeight / 1.5;
+    const openingSpace = boardHeight / 1.25;
 
     let randomPipeY = pipeY - top_pipe.height/4 - Math.random()*(top_pipe.height/2)
 
